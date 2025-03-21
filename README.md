@@ -1,325 +1,148 @@
-# 🚀 Mastering API Routes and Middleware in Next.js 14
+# DevUtils - Developer Utilities Toolkit
 
-## 🎯 **Objective**
+![DevUtils](https://via.placeholder.com/1200x300?text=DevUtils)
 
-This talk will provide a deep dive into mastering API routes and middleware in **Next.js 14**, helping frontend developers build robust and secure APIs seamlessly.
+DevUtils is a comprehensive collection of developer tools designed to streamline your workflow. This web application provides a wide range of utilities for encoding, decoding, formatting, and transforming data in various formats.
 
----
+## 🚀 Features
 
-## 📚 **Agenda**
+DevUtils includes the following tools:
 
-1. ✅ Introduction to API Routes in Next.js 14
-2. ✅ File-Based Routing for API Endpoints
-3. ✅ Creating RESTful API Routes
-4. ✅ Handling Query Parameters and Dynamic Routes
-5. ✅ Middleware: Controlling Request Flow
-6. ✅ Practical Use Cases for Middleware
-7. ✅ Error Handling and Securing API Routes
-8. ✅ Best Practices and Performance Optimization
-9. ✅ Live Demo and Q&A
+### 🔄 Encoders/Decoders
 
----
+- **Base64 Encoder/Decoder**: Convert text to and from Base64 encoding
+- **Base64 Image Converter**: Convert images to and from Base64 format
+- **URL Encoder/Decoder**: Encode and decode URL components
+- **HTML Encoder/Decoder**: Convert HTML special characters to and from their entity representations
 
-## 1. 🚩 **Introduction to API Routes in Next.js 14**
+### 📝 Formatters
 
-- API routes enable building a **backend within a Next.js project**.
-- Located inside the `/app/api` directory.
-- Use serverless functions to handle incoming HTTP requests.
+- **JSON Formatter**: Format and validate JSON with pretty print or compact options
+- **Markdown Preview**: Live preview of Markdown with support for GitHub Flavored Markdown
+- **Text Diff**: Compare two text blocks and highlight differences
 
-### ✅ **Key Changes in Next.js 14:**
+### 🔍 Parsers & Analyzers
 
-- Fully supports **app router** with API routes.
-- Middleware now works with edge runtime for improved performance.
-- Supports `GET`, `POST`, `PUT`, `DELETE` methods natively.
+- **JWT Decoder**: Decode and inspect JWT tokens
+- **URL Parser**: Parse and analyze URL components
+- **Word Counter**: Count characters, words, lines, and paragraphs in text
 
----
+### 🎲 Generators
 
-## 2. 📂 **File-Based Routing for API Endpoints**
+- **UUID Generator**: Generate random UUIDs
+- **Hash Generator**: Create SHA-256, SHA-384, and SHA-512 hashes
+- **Lorem Ipsum Generator**: Generate placeholder text
 
-- API routes follow the same file-based system as pages.
-- All API routes are placed under `/app/api`.
-- File name defines the endpoint.
+### 🔄 Converters
 
-### 📚 **Basic Folder Structure:**
+- **Unix Time Converter**: Convert between dates and Unix timestamps
+- **Number Base Converter**: Convert between binary, octal, decimal, and hexadecimal
+- **Color Converter**: Convert between HEX, RGB, and HSL color formats
+- **Case Converter**: Transform text between different case styles (upper, lower, title, camel, snake, kebab, pascal)
 
-```
-/app
-├── /api
-│   ├── /hello
-│   │   └── route.js
-│   ├── /user
-│   │   └── route.js
-│   └── /product
-│       └── route.js
-└── /page.js
-```
+### 🧰 Other Tools
 
-### 🔥 **Example: Basic API Route**
+- **Regex Tester**: Test and debug regular expressions with real-time highlighting
 
-`/app/api/hello/route.js`
+## 🖥️ Screenshots
 
-```javascript
-export async function GET(request) {
-  return Response.json({ message: "Hello, Next.js 14 API!" });
-}
-```
+![DevUtils Screenshot](https://via.placeholder.com/800x450?text=DevUtils+Screenshot)
 
-## 3. ⚡ **Creating RESTful API Routes**
+## 🛠️ Getting Started
 
-- Each route can handle multiple HTTP methods (GET, POST, PUT, DELETE).
-- Named `route.js` or `route.ts` in the respective folder.
+### Prerequisites
 
-### ✨ **Example: CRUD Operations for User**
+- Node.js 16.x or higher
+- npm or yarn
 
-`/app/api/user/route.js`
+### Installation
 
-```javascript
-export async function GET(request) {
-  return Response.json({ users: ["John", "Jane", "Doe"] });
-}
+1. Clone the repository:
 
-export async function POST(request) {
-  const body = await request.json();
-  return Response.json({ message: `User ${body.name} added!` });
-}
-
-export async function PUT(request) {
-  const body = await request.json();
-  return Response.json({ message: `User ${body.id} updated!` });
-}
-
-export async function DELETE(request) {
-  const { id } = await request.json();
-  return Response.json({ message: `User with ID ${id} deleted.` });
-}
+```bash
+git clone https://github.com/yourusername/devutils.git
+cd devutils
 ```
 
-## 4. 🔍 **Handling Query Parameters and Dynamic Routes**
+2. Install dependencies:
 
-- Use dynamic segments for parameters.
-- Define dynamic routes using square brackets `[]`.
-
-### 🎯 **Example: Fetch User by ID**
-
-`/app/api/user/[id]/route.js`
-
-```javascript
-export async function GET(request, { params }) {
-  const { id } = params;
-  return Response.json({ message: `User ID: ${id}` });
-}
+```bash
+npm install
+# or
+yarn install
 ```
 
-## 5. 🔄 **Middleware: Controlling Request Flow**
+3. Run the development server:
 
-- Middleware intercepts requests before they hit the API route.
-
-### 🎉 **Key Benefits:**
-
-- Authentication/Authorization
-- Logging, Caching, and Rate Limiting
-- Custom Headers Injection
-
-### 📍 **Middleware Location:**
-
-- Place middleware in `/middleware.js` or `/middleware.ts` at the project root.
-
-## 6. 🛡️ **Practical Use Cases for Middleware**
-
-### ✅ **Example: Basic Authentication Middleware**
-
-`/middleware.js`
-
-```javascript
-import { NextResponse } from "next/server";
-
-export function middleware(request) {
-  const authToken = request.headers.get("authorization");
-
-  if (!authToken || authToken !== "Bearer secretToken") {
-    return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
-  }
-
-  return NextResponse.next();
-}
-
-// Apply to specific routes
-export const config = {
-  matcher: ["/api/user/:path*"],
-};
+```bash
+npm run dev
+# or
+yarn dev
 ```
 
-## 7. 🚨 **Error Handling and Securing API Routes**
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-- Use try-catch blocks to handle errors gracefully.
-- Return appropriate HTTP status codes.
+## 📦 Building for Production
 
-### ❗ **Example: Enhanced Error Handling**
-
-```javascript
-export async function GET(request) {
-  try {
-    // Simulate DB fetch
-    const data = await fetchUserData();
-    return Response.json({ data });
-  } catch (error) {
-    return Response.json(
-      { error: "Failed to fetch user data" },
-      { status: 500 }
-    );
-  }
-}
+```bash
+npm run build
+# or
+yarn build
 ```
 
-## 8. 🎯 **Best Practices and Performance Optimization**
+Then start the production server:
 
-### 🚀 **Performance Tips**
-
-- Use Edge Middleware for low-latency response
-- Cache frequently accessed endpoints
-- Rate limit API calls to prevent abuse
-- Use `next/server` to leverage Edge Runtime
-
-### 🔒 **Security Best Practices**
-
-- Implement CORS policies
-- Use HTTPS for all API endpoints
-- Validate and sanitize all input data
-- Implement rate limiting
-
-### ⚡ **Example: Rate Limiting Middleware**
-
-```javascript
-import { NextResponse } from "next/server";
-
-const rateLimit = new Map();
-
-export function middleware(request) {
-  const ip = request.headers.get("x-forwarded-for");
-  const now = Date.now();
-  const timeFrame = 60 * 1000; // 1 minute
-  const maxRequests = 60; // requests per minute
-
-  const requestLog = rateLimit.get(ip) || [];
-  const recentRequests = requestLog.filter((time) => now - time < timeFrame);
-
-  if (recentRequests.length >= maxRequests) {
-    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
-  }
-
-  recentRequests.push(now);
-  rateLimit.set(ip, recentRequests);
-
-  return NextResponse.next();
-}
+```bash
+npm run start
+# or
+yarn start
 ```
 
-## 9. 🧪 **Testing API Routes**
+## 🧩 Project Structure
 
-### 📝 **Unit Testing Example**
-
-```javascript
-// __tests__/api/user.test.js
-import { GET, POST } from "@/app/api/user/route";
-
-describe("User API", () => {
-  it("should return users list", async () => {
-    const response = await GET();
-    const data = await response.json();
-    expect(data.users).toBeInstanceOf(Array);
-  });
-
-  it("should create new user", async () => {
-    const request = new Request("http://localhost:3000/api/user", {
-      method: "POST",
-      body: JSON.stringify({ name: "Test User" }),
-    });
-    const response = await POST(request);
-    const data = await response.json();
-    expect(data.message).toContain("Test User");
-  });
-});
+```
+/src
+├── /app                  # Next.js app directory
+│   ├── /globals.css      # Global styles
+│   ├── /layout.jsx       # Root layout component
+│   └── /page.jsx         # Home page component
+├── /components           # React components
+│   ├── /ToolSelector.jsx # Main tool selection component
+│   └── /tools            # Individual tool components
+└── /utils                # Utility functions
 ```
 
-## 10. 🔍 **Troubleshooting Common Issues**
+## 🔧 Technologies Used
 
-### ❌ **Common Errors and Solutions**
+- [Next.js](https://nextjs.org/) - React framework for server-rendered applications
+- [React](https://reactjs.org/) - UI library
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
+- [Lucide React](https://lucide.dev/) - Icon library
 
-1. **CORS Issues**
+## 🤝 Contributing
 
-```javascript
-// middleware.js
-export function middleware(request) {
-  const response = NextResponse.next();
-  response.headers.set("Access-Control-Allow-Origin", "*");
-  response.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE"
-  );
-  return response;
-}
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-2. **Request Body Parsing**
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-```javascript
-export async function POST(request) {
-  try {
-    const body = await request.json();
-  } catch (error) {
-    return Response.json(
-      { error: "Invalid JSON in request body" },
-      { status: 400 }
-    );
-  }
-}
-```
+## 📄 License
 
-3. **Environment Variables**
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-```javascript
-// .env.local
-API_KEY = your_secret_key;
+## 🙏 Acknowledgments
 
-// route.js
-export async function GET() {
-  if (!process.env.API_KEY) {
-    return Response.json({ error: "API key not configured" }, { status: 500 });
-  }
-}
-```
+- All the open-source libraries that made this project possible
+- The developer community for continuous inspiration
 
-## 🎁 **Bonus: Advanced Tips**
+## 🔮 Future Enhancements
 
-### 🔥 **API Response Helpers**
-
-```javascript
-// utils/api-helpers.js
-export const apiResponse = {
-  success: (data, status = 200) => {
-    return Response.json(data, { status });
-  },
-  error: (message, status = 400) => {
-    return Response.json({ error: message }, { status });
-  },
-};
-
-// Usage in route.js
-import { apiResponse } from "@/utils/api-helpers";
-
-export async function GET() {
-  try {
-    const data = await fetchData();
-    return apiResponse.success(data);
-  } catch (error) {
-    return apiResponse.error("Failed to fetch data");
-  }
-}
-```
-
-### 🛠️ **Development Tips**
-
-- Use TypeScript for better type safety and IDE support
-- Implement proper logging for debugging
-- Use Postman or similar tools for API testing
-- Consider implementing API documentation using Swagger/OpenAPI
+- Add more developer tools
+- Implement dark mode
+- Add ability to save tool configurations
+- Create a PWA version for offline use
+- Add user accounts to save preferences
