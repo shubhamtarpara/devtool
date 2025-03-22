@@ -19,13 +19,18 @@ import {
   GitCompare,
   AlignJustify,
   ImageIcon,
+  Braces,
+  FileCode,
+  FileSymlink,
 } from "lucide-react";
 import { Base64Tool } from "./tools/Base64Tool";
 import { JsonTool } from "./tools/JsonTool";
 import { HashGenerator } from "./tools/HashGenerator";
 import { TimestampTool } from "./tools/TimestampTool";
 import { UrlTool } from "./tools/UrlTool";
-import { HtmlTool } from "./tools/HtmlTool";
+// import { HtmlTool } from "./tools/HtmlTool";
+import { HtmlEntityTool } from "./tools/HtmlEntityTool";
+import { HtmlPreviewTool } from "./tools/HtmlPreviewTool";
 import { JwtTool } from "./tools/JwtTool";
 import { UuidTool } from "./tools/UuidTool";
 import { LoremIpsumTool } from "./tools/LoremIpsumTool";
@@ -37,8 +42,12 @@ import { RegexTool } from "./tools/RegexTool";
 import { DiffTool } from "./tools/DiffTool";
 import { WordCounterTool } from "./tools/WordCounterTool";
 import { Base64ImageTool } from "./tools/Base64ImageTool";
+import { BackslashEscapeTool } from "./tools/BackslashEscapeTool";
+import { YamlTool } from "./tools/YamlTool";
+import { JsonToYamlTool } from "./tools/JsonToYamlTool";
 import { motion, AnimatePresence } from "framer-motion";
 import { UrlParserTool } from "./tools/UrlParserTool";
+import { HtmlFormatterTool } from "./tools/HtmlFormatterTool";
 
 const tools = [
   {
@@ -74,7 +83,31 @@ const tools = [
     icon: Link,
     component: UrlParserTool,
   },
+  {
+    id: "html-entity",
+    name: "HTML Entity Encoder/Decoder",
+    icon: Code2,
+    component: HtmlEntityTool,
+  },
 
+  {
+    id: "backslash",
+    name: "Backslash Escape Tool",
+    icon: Braces,
+    component: BackslashEscapeTool,
+  },
+  {
+    id: "uuid",
+    name: "UUID Generator",
+    icon: Fingerprint,
+    component: UuidTool,
+  },
+  {
+    id: "html-preview",
+    name: "HTML Preview",
+    icon: Code2,
+    component: HtmlPreviewTool,
+  },
   {
     id: "markdown",
     name: "Markdown Preview",
@@ -87,6 +120,19 @@ const tools = [
     icon: GitCompare,
     component: DiffTool,
   },
+  { id: "yaml", name: "YAML to JSON", icon: FileSymlink, component: YamlTool },
+  {
+    id: "json-to-yaml",
+    name: "JSON to YAML",
+    icon: FileCode,
+    component: JsonToYamlTool,
+  },
+  {
+    id: "number",
+    name: "Number Base Converter",
+    icon: Binary,
+    component: NumberBaseTool,
+  },
   {
     id: "wordcount",
     name: "Word Counter",
@@ -97,18 +143,18 @@ const tools = [
   { id: "hash", name: "Hash Generator", icon: Hash, component: HashGenerator },
 
   {
-    id: "html",
-    name: "HTML Encoder/Decoder",
+    id: "html-formatter",
+    name: "HTML Formatter",
     icon: Code2,
-    component: HtmlTool,
+    component: HtmlFormatterTool,
   },
+  // {
+  //   id: "html",
+  //   name: "HTML Encoder/Decoder",
+  //   icon: Code2,
+  //   component: HtmlTool,
+  // },
 
-  {
-    id: "uuid",
-    name: "UUID Generator",
-    icon: Fingerprint,
-    component: UuidTool,
-  },
   {
     id: "lorem",
     name: "Lorem Ipsum Generator",
@@ -121,12 +167,6 @@ const tools = [
     name: "Case Converter",
     icon: TextCursorInput,
     component: CaseTool,
-  },
-  {
-    id: "number",
-    name: "Number Base Converter",
-    icon: Binary,
-    component: NumberBaseTool,
   },
 ];
 

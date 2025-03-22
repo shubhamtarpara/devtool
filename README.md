@@ -112,6 +112,22 @@ yarn start
 └── /utils                # Utility functions
 ```
 
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
 ## 🔧 Technologies Used
 
 - [Next.js](https://nextjs.org/) - React framework for server-rendered applications
